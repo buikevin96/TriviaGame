@@ -18,37 +18,37 @@ var questions = [{
 	question: "Who was the only President to serve more than two terms?",
 	answers: ["Ulysses S. Grant", "Theodore Roosevelt", "George Washington", "Franklin D. Roosevelt"],
 	correctAnswer: "Franklin D. Roosevelt",
-	image: "assets/images/fdr.jpg" ,
+	image: "../images/fdr.jpg" ,
 }, {
 	question: "Who was the only President to serve 2 non-consecutive terms?",
 	answers: ["Ronald Reagan", "Theodore Roosevelt", "Grover Cleveland", "Woodrow Wilson"],
 	correctAnswer: "Grover Cleveland",
-	image: "assets/images/gover2x.jpg" ,
+	image: "../images/gover2x.jpg" ,
 }, {
 	question: "Who was the oldest elected President",
 	answers: ["Donald Trump", "Ronald Reagan", "James Buchanan", "Dwight D. Eisenhower"],
 	correctAnswer: "Donald Trump",
-	image: "assets/images/dtrump.jpg",
+	image: "../images/dtrump.jpg",
 }, {
 	question: "Who was the first President to live in the White House?",
 	answers: ["Thomas Jefferson", "George Washington", "John Adams", "Andrew Jackson"],
 	correctAnswer: "John Adams",
-	image: "assets/images/johnadams.jpg",
+	image: "../images/johnadams.jpg",
 }, {
 	question: "Who was the first President born outside the contiguous United States",
 	answers: ["Benjamin Harrison", "Franklin Pierce", "Barack Obama", "William Howard Taft"],
 	correctAnswer: "Barack Obama",
-	image: "assets/images/barackfam.jpg",
+	image: "../images/barackfam.jpg",
 }, {
 	question: "Before the 12th Amendment was passed in 1804, how was the Vice President determined?",
 	answers: ["Appointed by the President", "President and Vice President were voted on separately", "The Presidential candidate receiving the second-largest number of electoral votes", "There was no official Vice President before 1804"],
 	correctAnswer: "The Presidential candidate receiving the second-largest number of electoral votes",
-	image: "assets/images/1804election.jpg",
+	image: "../images/1804election.jpg",
 }, {
 	question: "Which U.S President signed the treaty to purchase Alaska from Russia?",
 	answers: ["Ulysses S. Grant", "Andrew Johnson", "James Buchanan", "Andrew Jackson"],
 	correctAnswer: "Andrew Johnson",
-	image: "assets/images/andrewjohnson.jpg",
+	image: "../images/andrewjohnson.jpg",
 }]
 
 // Game Object
@@ -64,7 +64,7 @@ var game = {
 		$("#counter").html(game.counter);
 		if(game.counter<=0){
 			console.log("Time's Up!");
-			game.timeUp;
+			game.timeUp();
 		}
 	},
 	loadQuestion: function(){
@@ -90,6 +90,7 @@ var game = {
 		$('#subwrapper').html('<h2>Out of time</h2>');
 		$('#subwrapper').append('<h3>The correct answer was: ' + questions[game.
 			currentQuestion].correctAnswer+ '</h3>'); // Displays the correct answer
+		$('#subwrapper').append('<img src = "questions[game.currentQuestion].image" />'); // Appends 
 		if(game.currentQuestion == questions.length-1){
 			setTimeout(game.results, 3*1000); // Wait 3 seconds, and if last question, go to results page
 		} else {
@@ -118,11 +119,13 @@ var game = {
 		console.log("You Got it!");
 		clearInterval(timer);
 		game.correct++; // Increase correct counter by 1
-		$('#subwrapper').html('<h2>You got it right!</h2>'); 
+		$('#subwrapper').html('<h2>You got it right!</h2>');
+		$('#subwrapper').append('<img src = "questions[game.currentQuestion].image" />'); 
+		$('#subwrapper').append('<h3> You chose: ' + questions[game.currentQuestion].correctAnswer + '</h3>');
 		if(game.currentQuestion == questions.length-1){
-			setTimeout(game.results, 3*1000); // Wait 3 seconds, and if last question, go to results page
+			setTimeout(game.results, 5*1000); // Wait 3 seconds, and if last question, go to results page
 		} else {
-			setTimeout(game.nextQuestion, 3*1000); // Wait 3 seconds, and go to next page
+			setTimeout(game.nextQuestion, 5*1000); // Wait 3 seconds, and go to next page
 		}
 	},
 	answeredIncorrectly: function() {
@@ -132,10 +135,11 @@ var game = {
 		$('#subwrapper').html('<h2>You got it wrong!</h2>');
 		$('#subwrapper').append('<h3>The correct answer was: ' + questions[game.
 			currentQuestion].correctAnswer+ '</h3>'); // Displays the correct answer
+		$('#subwrapper').append('<img src = "questions[game.currentQuestion].image" />'); 
 		if(game.currentQuestion == questions.length -1){
-			setTimeout(game.results, 3*1000);
+			setTimeout(game.results, 5*1000);
 		} else {
-			setTimeout(game.nextQuestion, 3 *1000);
+			setTimeout(game.nextQuestion, 5*1000);
 		}
 	},
 	reset: function(){ // resets every count to original amount
